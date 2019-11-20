@@ -1,27 +1,29 @@
 package model;
 
+import java.util.Date;
+
 public class Faltas {
-	int ra_aluno;
-	int cod_disciplina;
-	String data;
-	String presenca;
+	private Aluno aluno;
+	private Disciplina disciplina;
+	private Date data;
+	private String presenca;
 	
-	public int getRa_aluno() {
-		return ra_aluno;
+	public Aluno getAluno() {
+		return aluno;
 	}
-	public void setRa_aluno(int ra_aluno) {
-		this.ra_aluno = ra_aluno;
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
 	}
-	public int getCod_disciplina() {
-		return cod_disciplina;
+	public Disciplina getDisciplina() {
+		return disciplina;
 	}
-	public void setCod_disciplina(int cod_disciplina) {
-		this.cod_disciplina = cod_disciplina;
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
 	}
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
-	public void setData(String data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 	public String getPresenca() {

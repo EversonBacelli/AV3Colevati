@@ -3,8 +3,8 @@ package model;
 import enuns.Tipo;
 
 public class Avaliacao {
-	int codigo;
-	Tipo tipo;
+	private int codigo;
+	private Tipo tipo;
 	
 	public int getCodigo() {
 		return codigo;
