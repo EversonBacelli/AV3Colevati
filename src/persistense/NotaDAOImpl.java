@@ -21,9 +21,9 @@ public class NotaDAOImpl implements NotaDAO{
 					+ " (ra_aluno, cod_disciplina, cod_avalicacao, nota)"
 					+ " VALUES (?, ?, ?, ?)";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setInt          (1, notas.getRa_aluno());
-			stmt.setInt          (2, notas.getCod_disciplina());
-			stmt.setInt          (3,  notas.getCod_avaliacao());
+			stmt.setInt          (1, notas.getAluno().getRa());
+			stmt.setInt          (2, notas.getDisciplina().getCodigo());
+			stmt.setInt          (3,  notas.getDisciplina().getCodigo());
 			stmt.setDouble       (4,  notas.getNota());
 			stmt.executeUpdate();
 			con.close();
@@ -49,9 +49,9 @@ public class NotaDAOImpl implements NotaDAO{
 			ResultSet rs = ps.getResultSet();
 			while(rs.next()) {
 				Notas notas = new Notas();
-				notas.setRa_aluno(rs.getInt("ra_aluno"));
-				notas.setCod_disciplina(rs.getInt("cod_disciplina"));
-				notas.setCod_avaliacao(rs.getInt("cod_avalicacao"));
+				notas.getAluno().setRa(rs.getInt("ra_aluno"));
+				notas.getDisciplina().setCodigo(rs.getInt("cod_disciplina"));
+				notas.getAvaliacao().setCodigo(rs.getInt("cod_avalicacao"));
 				notas.setNota(rs.getDouble("nota"));
 				listaNotas.add(notas);
 			}
@@ -73,7 +73,7 @@ public class NotaDAOImpl implements NotaDAO{
 		try {
 			Connection con = DBUtil.getInstance().getConnection();
 			String sql = "UPDATE tbl_notas set nota = " + nota.getNota() 
-					+ "where ra_aluno = " + nota.getRa_aluno();
+					+ "where ra_aluno = " + nota.getAluno().getRa();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.executeUpdate();
 			con.close();
@@ -96,7 +96,7 @@ public class NotaDAOImpl implements NotaDAO{
 		try {
 			con = DBUtil.getInstance().getConnection();
 			String sql = "DELETE from tbl_notas " 
-			+ "where ra_aluno = " + nota.getRa_aluno();
+			+ "where ra_aluno = " + nota.getAluno().getRa();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.executeUpdate();
 			con.close();

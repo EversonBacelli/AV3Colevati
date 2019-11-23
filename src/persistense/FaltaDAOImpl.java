@@ -1,6 +1,7 @@
 package persistense;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,9 +22,9 @@ public class FaltaDAOImpl implements FaltaDAO {
 					+ " (ra_aluno, cod_disciplina, data, presenca)"
 					+ " VALUES (?, ?, ?, ?)";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setInt          (1, falta.getRa_aluno());
-			stmt.setInt          (2, falta.getCod_disciplina());
-			stmt.setString       (3,  falta.getData());
+			stmt.setInt          (1, falta.getAluno().getRa());
+			stmt.setInt          (2, falta.getDisciplina().getCodigo());
+			stmt.setDate         (3, new Date(falta.getData().getTime())) ;
 			stmt.setString       (4,  falta.getPresenca());
 			stmt.executeUpdate();
 			con.close();
@@ -48,9 +49,9 @@ public class FaltaDAOImpl implements FaltaDAO {
 			ResultSet rs = ps.getResultSet();
 			while(rs.next()) {
 				Faltas faltas = new Faltas();
-				faltas.setRa_aluno(rs.getInt("ra_aluno"));
-				faltas.setCod_disciplina(rs.getInt("cod_disciplina"));
-				faltas.setData(rs.getString("data"));
+				faltas.getAluno().setRa(rs.getInt("ra_aluno"));
+				faltas.getDisciplina().setCodigo(rs.getInt("cod_disciplina"));
+				faltas.setData(rs.getDate("data"));
 				faltas.setPresenca(rs.getString("presenca"));
 				listaFaltas.add(faltas);
 			}
@@ -73,7 +74,7 @@ public class FaltaDAOImpl implements FaltaDAO {
 		try {
 			Connection con = DBUtil.getInstance().getConnection();
 			String sql = "UPDATE tbl_faltas set presenca = '" + faltas.getPresenca() 
-					+ "' where ra_aluno = " + faltas.getRa_aluno();
+					+ "' where ra_aluno = " + faltas.getAluno().getRa();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.executeUpdate();
 			con.close();
