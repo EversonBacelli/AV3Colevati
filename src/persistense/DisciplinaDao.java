@@ -6,4 +6,5 @@ import model.Disciplina;
 
 public interface DisciplinaDao {
 	List<Disciplina> findAllForCombo();
+
 }

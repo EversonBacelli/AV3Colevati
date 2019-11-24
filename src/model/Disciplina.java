@@ -13,6 +13,7 @@ public class Disciplina {
 	private int num_aulas;
 	private List<Faltas> faltas = new ArrayList<Faltas>();
 	private List<Notas> notas = new ArrayList<Notas>();
+	private List<Matricula> matriculas = new ArrayList<Matricula>();
 	
 	public int getCodigo() {
 		return codigo;
@@ -55,6 +56,18 @@ public class Disciplina {
 	}
 	public void setNotas(List<Notas> notas) {
 		this.notas = notas;
+	}
+	public void adicionarMatricula(Matricula m) {
+		this.matriculas.add(m);
+	}
+	public void removerMatricula(Matricula m) {
+		this.matriculas.remove(m);
+	}
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
 	}
 	
 }

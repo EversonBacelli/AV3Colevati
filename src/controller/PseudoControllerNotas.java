@@ -22,7 +22,6 @@ public class PseudoControllerNotas {
 	}
 
 
-
 	private static void atualizarNotas() {
 		NotaDAO nDao = new NotaDAOImpl();
 		Notas n = new Notas();

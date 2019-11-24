@@ -31,62 +31,79 @@ body {
 </head>
 <body>
 	<div class="container main">
-		<form action="">
+		<form action="./notas" method="get">
 			<select name="materia">
 				<c:forEach var="disc" items="${disciplinas}">
-					<option value="${disc}">${disc.nome} - ${disc.sigla}</option>
+					<option value="${disc.nome}-${disc.sigla}">${disc.nome}-
+						${disc.sigla}</option>
 				</c:forEach>
 			</select>
-			<button type="submit" class="btn btn-primary">Procurar</button>
+			<button type="submit" name="cmd" value="Procurar"
+				class="btn btn-primary">Procurar</button>
 		</form>
-		
-		<c:if test="${not empty alunos}">
-			<h1>Inserir notas</h1>
-			<table class="table table-striped table-dark">
-				<thead>
-					<tr>
-						<th scope="col">Nome</th>
-						<th scope="col">N2</th>
-						<th scope="col">N1</th>
-						<th scope="col">N3</th>
-					</tr>
-				</thead>
-				<tbody scope="row">
-					<c:set var="value" value="1" scope="page" />
-					<tr>
-						<td class="${value}">Bruno Cardoso</td>
-						<td>
-							<div class="col-xs-6">
-								<div class="range">
-									<input type="range" name="range" min="1" max="10" value="5"
-										onchange="range.value=value">
-									<output id="range">5</output>
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="col-xs-6">
-								<div class="range range-success">
-									<input type="range" name="range" min="1" max="10" value="5"
-										onchange="rangeSuccess.value=value">
-									<output id="rangeSuccess">5</output>
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="col-xs-6">
-								<div class="range range-primary">
-									<input type="range" name="range" min="1" max="10" value="5"
-										onchange="rangePrimary.value=value">
-									<output id="rangePrimary">5</output>
-								</div>
-							</div>
-						</td>
-						<c:set var="value" value="${value + 1}" scope="page" />
-					</tr>
-				</tbody>
-			</table>
-		</c:if>
+
+		<form action="./notas" method="post">
+			<c:set var="alunosNotas" scope="request" value="${alunosNotas}" />
+			<c:if test="${not empty alunosNotas}">
+				<h1>Inserir notas</h1>
+				<table class="table table-striped table-dark">
+					<thead>
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Id Disciplina</th>
+							<th scope="col">Nome</th>
+							<th scope="col">N2</th>
+							<th scope="col">N1</th>
+							<th scope="col">N3</th>
+						</tr>
+					</thead>
+					<tbody scope="row">
+						<c:forEach items="${alunosNotas}" var="alunoNota">
+							<tr>
+								<c:set var="value" value="1" scope="page" />
+								<td>${alunoNota.ra}</td>
+								<td>${alunoNota.idDisciplina}</td>
+								<td>${alunoNota.alunoNome}</td>
+								<td>
+									<div class="col-xs-6">
+										<div class="range range${value}">
+											<input value="${alunoNota.nota1}" type="range"
+												name="range" min="1" max="10" value="5"
+												onchange="range${value}.value=value">
+											<output id="range${value}">5</output>
+										</div>
+									</div>
+								</td>
+								<c:set var="value" value="${value + 1 }" scope="page" />
+								<td>
+									<div class="col-xs-6">
+										<div class="range range${value}">
+											<input value="${alunoNota.nota2}"
+												type="range" name="range" min="1" max="10" value="5"
+												onchange="range${value}.value=value">
+											<output id="range${value}">5</output>
+										</div>
+									</div>
+								</td>
+								<td>
+									<div class="col-xs-6">
+										<div class="range range${value}">
+											<input value="${alunoNota.nota3}" type="range" name="range"
+												min="1" max="10" value="5"
+												onchange="range${value}.value=value">
+											<output id="range${value}">5</output>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<button type="submit" name="cmd" value="Salvar"
+					class="btn btn-primary">Salvar</button>
+			</c:if>
+		</form>
+
 	</div>
 	<script
 		src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>

@@ -8,6 +8,7 @@ public class Aluno {
 	private String nome;
 	private List<Faltas> faltas = new ArrayList<Faltas>();
 	private List<Notas> notas = new ArrayList<Notas>();
+	private List<Matricula> matriculas = new ArrayList<Matricula>();
 	
 	public int getRa() {
 		return ra;
@@ -33,5 +34,16 @@ public class Aluno {
 	public void setNotas(List<Notas> notas) {
 		this.notas = notas;
 	}
-	
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
+	}
+	public void adicionarMatricula(Matricula m) {
+		this.matriculas.add(m);
+	}
+	public void removerMatricula(Matricula m) {
+		this.matriculas.remove(m);
+	}	
 }
