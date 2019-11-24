@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.Disciplina;
+import persistense.DisciplinaDao;
+import persistense.DisciplinaDaoImpl;
 
 @WebServlet("/notas")
 public class NotasServlet extends HttpServlet{
@@ -20,6 +25,9 @@ public class NotasServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatcher =  req.getServletContext().getRequestDispatcher("/WEB-INF/notas.jsp");
+		DisciplinaDao dDao = new DisciplinaDaoImpl();
+		List<Disciplina> disciplinas = dDao.findAllForCombo();
+		req.setAttribute("disciplinas", disciplinas);
 		dispatcher.forward(req, resp);
 	}
 	

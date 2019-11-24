@@ -18,5 +18,4 @@ public class Avaliacao {
 	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
 	}
-	
 }

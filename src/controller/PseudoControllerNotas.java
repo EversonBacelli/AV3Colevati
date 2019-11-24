@@ -15,8 +15,6 @@ public class PseudoControllerNotas {
 		// TODO Auto-generated method stub
 	}
 
-
-
 	private static void deletarNota() {
 		NotaDAO nDao = new NotaDAOImpl();
 		Notas n = new Notas();
