@@ -97,8 +97,6 @@
 			</tbody>
 		</table>
 
-
-
 	</div>
 	<br>
 	<br>
@@ -141,21 +139,21 @@
 		for (var i = 1; i < meuArray.length; i++) {
 			var elements = document.getElementsByName(meuArray[i][0]);
 			for(var j = 0;j<elements.length;j++){
-				var check = elements[i].checked;
+				var check = elements[j].checked;
 				if(check == true){
-					meuArray[i].push(element[j].value);
+					meuArray[i].push(elements[j].value);
 			    }
 			}
 		}
 		
 		
 		
-		for (var i = 0; i < meuArray.length; i++) {
+		for (var i = 1; i < meuArray.length; i++) {
 			var alunoFalta = new AlunosFaltas();
 			alunoFalta.ra_aluno = meuArray[i][0];
 			alunoFalta.nome_aluno = meuArray[i][1];
 			alunoFalta.presenca_aluno = meuArray[i][2];
-			finalArray[i].push(alunoFalta);
+			finalArray.push(alunoFalta);
 		}
 	
 		

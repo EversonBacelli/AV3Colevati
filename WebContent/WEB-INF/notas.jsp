@@ -41,42 +41,40 @@ body {
 			<button type="submit" name="cmd" value="Procurar"
 				class="btn btn-primary">Procurar</button>
 		</form>
-		<form action="" id="form">
-			<c:set var="alunosNotas" scope="request" value="${alunosNotas}" />
-			<c:if test="${not empty alunosNotas}">
-				<h1>Inserir notas</h1>
-				<table class="table table-striped table-dark" id="myTable">
-					<thead>
-						<tr>
-							<th scope="col">Id</th>
-							<th scope="col">Id Disciplina</th>
-							<th scope="col">Nome</th>
-							<th scope="col">N2</th>
-							<th scope="col">N1</th>
-							<th scope="col">N3</th>
+		<c:set var="alunosNotas" scope="request" value="${alunosNotas}" />
+		<c:if test="${not empty alunosNotas}">
+			<h1>Inserir notas</h1>
+			<table class="table table-striped table-dark" id="myTable">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Id Disciplina</th>
+						<th scope="col">Nome</th>
+						<th scope="col">N2</th>
+						<th scope="col">N1</th>
+						<th scope="col">N3</th>
+					</tr>
+				</thead>
+				<tbody scope="row">
+					<c:forEach items="${alunosNotas}" var="alunoNota">
+						<tr id="corpo">
+							<c:set var="value" value="1" scope="page" />
+							<td id="texto">${alunoNota.ra}</td>
+							<td id="texto">${alunoNota.idDisciplina}</td>
+							<td id="texto">${alunoNota.alunoNome}</td>
+							<td><input type="number" name="n1"
+								class="form-control ${alunoNota.ra}"></td>
+							<td><input type="number" name="n2"
+								class="form-control ${alunoNota.ra}"></td>
+							<td><input type="number" name="n3"
+								class="form-control ${alunoNota.ra}"></td>
 						</tr>
-					</thead>
-					<tbody scope="row">
-						<c:forEach items="${alunosNotas}" var="alunoNota">
-							<tr id="corpo">
-								<c:set var="value" value="1" scope="page" />
-								<td id="texto">${alunoNota.ra}</td>
-								<td id="texto">${alunoNota.idDisciplina}</td>
-								<td id="texto">${alunoNota.alunoNome}</td>
-								<td><input type="number" name="n1"
-									class="form-control ${alunoNota.ra}"></td>
-								<td><input type="number" name="n2"
-									class="form-control ${alunoNota.ra}"></td>
-								<td><input type="number" name="n3"
-									class="form-control ${alunoNota.ra}"></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-				<button type="submit" name="cmd" value="Salvar"
-					class="btn btn-primary" onclick="salvarJson()">Salvar</button>
-			</c:if>
-		</form>
+					</c:forEach>
+				</tbody>
+			</table>
+			<button type="submit" name="cmd" value="Salvar"
+				class="btn btn-primary" onclick="salvarJson()">Salvar</button>
+		</c:if>
 	</div>
 	<script
 		src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
@@ -126,9 +124,7 @@ body {
 			}
 			
 			
-			
 			for (var i = 0; i < meuArray.length; i++) {
-				
 				var alunosNotas = new AlunosNotas();
 				alunosNotas.ra = meuArray[i][0];
 				alunosNotas.idDisciplina = meuArray[i][1];

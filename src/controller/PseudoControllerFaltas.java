@@ -12,7 +12,6 @@ public class PseudoControllerFaltas {
 		FaltaDAO fDao = new FaltaDAOImpl();
 		fDao.deletarFaltas(3);
 	}
-	
 	private static void atualizarFalta() {
 		FaltaDAO fDao = new FaltaDAOImpl();
 		Faltas faltas = new Faltas();
@@ -27,7 +26,6 @@ public class PseudoControllerFaltas {
 		for(Faltas f: listaFaltas) {
 		}
 	}
-
 	private static void InserirFaltas() {
 		Faltas f = new Faltas();
 		f.setPresenca("P");
