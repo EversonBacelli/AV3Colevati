@@ -1,8 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 
 <html lang="pt-br">
 <head>
-<!-- Meta tags Obrigatórias -->
+<!-- Meta tags Obrigat�rias -->
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,7 +14,7 @@
 	href="node_modules/bootstrap/compiler/bootstrap.css">
 <link rel="stylesheet" href="node_modules/bootstrap/compiler/style.scss">
 
-<!-- nesse trecho é criado o navbar, acrescentado as corres back-ground dele-->
+<!-- nesse trecho � criado o navbar, acrescentado as corres back-ground dele-->
 <!-- navbar-dark: coloca as letras brancas navbar-light: letras pretas  -->
 <!-- bg-primary: cor de fundo azul, bg-light: branca, bg-warning: laranja -->
 <style type="text/css">
@@ -58,55 +60,16 @@ nav {
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link"
 							href="av3Colevati.html">Tela Principal</a></li>
-						<li class="nav-item"><a class="nav-link" href="WEB-INF/relatorios.jsp">Relatórios
+						<li class="nav-item"><a class="nav-link" href="./relatorios">Relat�rios
 								</a></li>
-						<li class="nav-item"><a class="nav-link" href="WEB-INF/faltas.jsp">Faltas
+						<li class="nav-item"><a class="nav-link" href="./faltas">Faltas
 							</a></li>
-						<li class="nav-item"><a class="nav-link" href="WEB-INF/notas.jsp">Notas
+						<li class="nav-item"><a class="nav-link" href="./notas">Notas
 							</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
-
-
-		<div class="row mb-5">
-			<div class="col-sm-4">
-				<img class="card-img-top" src="images/card1.jpg" id="imgCard">
-				<div class="card-body">
-					<h4 class="card-title">Agradecimento</h4>
-					<h6 class="sub-title mt-02"></h6>
-					<p class="card-text">
-						djflkasjdfkasjdfjaksj	
-					</p>
-					
-				</div>
-
-			</div>
-			<div class="col-sm-4">
-				<img class="card-img-top" src="images/card2.jpg" id="imgCard">
-				<div class="card-body">
-					<h4 class="card-title">ADJKSJFKD</h4>
-					<h6 class="sub-title mt-02"></h6>
-					<p class="card-text">Seção 1.10.32 de "de Finibus Bonorum et
-						Malorum", escrita por Cícero em 45 AC</p>
-					<a href="c" class="card-link" type="button"> asdfadd </a> <a
-						href="c" class="card-link" type="button"> asdfadd </a>
-				</div>
-
-			</div>
-			<div class="col-sm-4">
-				<img class="card-img-top" src="images/card3.jpg" id="imgCard">
-				<div class="card-body">
-					<h4 class="card-title">ADJKSJFKD</h4>
-					<h6 class="sub-title mt-02"></h6>
-					<p class="card-text">Seção 1.10.32 de "de Finibus Bonorum et
-						Malorum", escrita por Cícero em 45 AC</p>
-					<a href="c" class="card-link" type="button"> asdfadd </a> <a
-						href="c" class="card-link" type="button"> asdfadd </a>
-				</div>
-			</div>
-		</div>
 	</div>
 
 
