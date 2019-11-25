@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import model.Aluno;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import model.AlunosNotas;
 import model.Disciplina;
 import model.Matricula;
@@ -39,8 +41,7 @@ public class NotasServlet extends HttpServlet{
 			String disciplinaQuebrada[] = valor.split("-");
 			List<Matricula> listaMatriculas = mDao.listAllMatriculasByDisciplina(disciplinaQuebrada[0], disciplinaQuebrada[1]);
 			List<AlunosNotas> alunosNotas = getAlunosNotas(listaMatriculas);
-			HttpSession session = req.getSession();
-			session.setAttribute("alunosNotas", alunosNotas);
+			req.setAttribute("alunosNotas", alunosNotas);
 		}
 		List<Disciplina> disc = (List<Disciplina>) req.getAttribute("disciplinas");
 		if(disc == null) {
@@ -53,9 +54,11 @@ public class NotasServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
-		List<AlunosNotas> alunosNotas = (List<AlunosNotas>) session.getAttribute("alunosNotas");
-		System.out.println("oi");
+		String json = req.getParameter("finalArray");
+		Gson gson = new Gson();
+		Type listType = new TypeToken<ArrayList<AlunosNotas>>(){}.getType();
+		List<AlunosNotas>listaAlunos = gson.fromJson(json, listType);
+		doGet(req, resp);
 	}
 	
 	public List<AlunosNotas> getAlunosNotas(List<Matricula> listaMatriculas){
@@ -65,9 +68,6 @@ public class NotasServlet extends HttpServlet{
 			alunoNota.setRa(m.getAluno().getRa());
 			alunoNota.setIdDisciplina(m.getDisciplina().getCodigo());
 			alunoNota.setAlunoNome(m.getAluno().getNome());
-			alunoNota.setNota1(3);
-			alunoNota.setNota2(3);
-			alunoNota.setNota3(3);
 			listaAlunoNotas.add(alunoNota);
 		}
 		return listaAlunoNotas;

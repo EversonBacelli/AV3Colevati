@@ -41,12 +41,11 @@ body {
 			<button type="submit" name="cmd" value="Procurar"
 				class="btn btn-primary">Procurar</button>
 		</form>
-
-		<form action="./notas" method="post">
+		<form action="" id="form">
 			<c:set var="alunosNotas" scope="request" value="${alunosNotas}" />
 			<c:if test="${not empty alunosNotas}">
 				<h1>Inserir notas</h1>
-				<table class="table table-striped table-dark">
+				<table class="table table-striped table-dark" id="myTable">
 					<thead>
 						<tr>
 							<th scope="col">Id</th>
@@ -59,51 +58,25 @@ body {
 					</thead>
 					<tbody scope="row">
 						<c:forEach items="${alunosNotas}" var="alunoNota">
-							<tr>
+							<tr id="corpo">
 								<c:set var="value" value="1" scope="page" />
-								<td>${alunoNota.ra}</td>
-								<td>${alunoNota.idDisciplina}</td>
-								<td>${alunoNota.alunoNome}</td>
-								<td>
-									<div class="col-xs-6">
-										<div class="range range${value}">
-											<input value="${alunoNota.nota1}" type="range"
-												name="range" min="1" max="10" value="5"
-												onchange="range${value}.value=value">
-											<output id="range${value}">5</output>
-										</div>
-									</div>
-								</td>
-								<c:set var="value" value="${value + 1 }" scope="page" />
-								<td>
-									<div class="col-xs-6">
-										<div class="range range${value}">
-											<input value="${alunoNota.nota2}"
-												type="range" name="range" min="1" max="10" value="5"
-												onchange="range${value}.value=value">
-											<output id="range${value}">5</output>
-										</div>
-									</div>
-								</td>
-								<td>
-									<div class="col-xs-6">
-										<div class="range range${value}">
-											<input value="${alunoNota.nota3}" type="range" name="range"
-												min="1" max="10" value="5"
-												onchange="range${value}.value=value">
-											<output id="range${value}">5</output>
-										</div>
-									</div>
-								</td>
+								<td id="texto">${alunoNota.ra}</td>
+								<td id="texto">${alunoNota.idDisciplina}</td>
+								<td id="texto">${alunoNota.alunoNome}</td>
+								<td><input type="number" name="n1"
+									class="form-control ${alunoNota.ra}"></td>
+								<td><input type="number" name="n2"
+									class="form-control ${alunoNota.ra}"></td>
+								<td><input type="number" name="n3"
+									class="form-control ${alunoNota.ra}"></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 				<button type="submit" name="cmd" value="Salvar"
-					class="btn btn-primary">Salvar</button>
+					class="btn btn-primary" onclick="salvarJson()">Salvar</button>
 			</c:if>
 		</form>
-
 	</div>
 	<script
 		src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
@@ -118,9 +91,73 @@ body {
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		function alteraValor(valor) {
-			var element = document
+		function salvarJson() {
+			
+			var finalArray = [];
+			
+			class AlunosNotas{
+				ra;
+				idDisciplina;
+				alunoNome;
+				nota1;
+				nota2;
+				nota3;
+			}
+			
+			
+
+			var meuArray = Array.prototype.map.call(document
+					.querySelectorAll('#myTable #corpo'), function(tr) {
+				return Array.prototype.map.call(tr.querySelectorAll('#texto'),
+						function(td) {
+							return td.innerHTML;
+						});
+			});
+
+			for (var i = 0; i < meuArray.length; i++) {
+				var element = document.getElementsByClassName(meuArray[i][0]);
+				console.log(element);
+				for (var j = 0; j < element.length; j++) {
+					meuArray[i].push(element[j].value);
+				}
+			}
+			
+			
+			
+			for (var i = 0; i < meuArray.length; i++) {
+				
+				var alunosNotas = new AlunosNotas();
+				alunosNotas.ra = meuArray[i][0];
+				alunosNotas.idDisciplina = meuArray[i][1];
+				alunosNotas.alunoNome = meuArray[i][2];
+				alunosNotas.nota1 = meuArray[i][3];
+				alunosNotas.nota2 = meuArray[i][4];
+				alunosNotas.nota3 = meuArray[i][5];
+				finalArray.push(alunosNotas)
+			}
+		
+			
+			var URL = 'http://localhost:8080/AV3Colevati/notas';
+
+			$.ajax({
+				type : 'post', // it's easier to read GET request parameters
+				url : URL,
+				dataType : 'JSON',
+				data : {
+					loadProds : 1,
+					finalArray : JSON.stringify(finalArray)
+				// look here!
+				},
+				success : function(data) {
+
+				},
+				error : function(data) {
+					alert('fail');
+				}
+			});
 		}
 	</script>
 </body>

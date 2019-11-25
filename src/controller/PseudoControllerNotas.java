@@ -33,9 +33,7 @@ public class PseudoControllerNotas {
 
 	private static void visualizarNotas() {
 		NotaDAO nota = new NotaDAOImpl();
-
 		List<Notas> listaNotas = nota.visualizarNotas(1);
-		
 		for(Notas n: listaNotas) {
 		}
 	}
