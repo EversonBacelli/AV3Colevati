@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import model.Aluno;
 import model.AlunosFaltas;
 import model.AlunosNotas;
 import model.Disciplina;
@@ -43,8 +45,7 @@ public class FaltasServilet extends HttpServlet {
 		String cmd = req.getParameter("cmd");
 		if(cmd != null && cmd.equals("BuscarTurma")) {
 			String valor = req.getParameter("materia");
-			String disciplinaQuebrada[] = valor.split("-");
-			List<Matricula> listaMatriculas = mDao.listAllMatriculasByDisciplina(disciplinaQuebrada[0], disciplinaQuebrada[1]);
+			List<Matricula> listaMatriculas = mDao.listAllMatriculasByDisciplina(Integer.parseInt(valor));
 			List<AlunosFaltas> alunosFaltas = getAlunosFaltas(listaMatriculas);
 			HttpSession session = req.getSession();
 			session.setAttribute("alunosFaltas", alunosFaltas);
@@ -66,6 +67,21 @@ public class FaltasServilet extends HttpServlet {
 		Gson gson = new Gson();
 		Type listType = new TypeToken<ArrayList<AlunosFaltas>>(){}.getType();
 		List<AlunosFaltas> alunosDaFaltas  = gson.fromJson(json, listType);
+		FaltaDAO fDao = new FaltaDAOImpl();
+		for(AlunosFaltas af: alunosDaFaltas) {
+			Aluno a = new Aluno();
+			a.setRa(af.getRa_aluno());
+			a.setNome(af.getNome_aluno());
+			Faltas f = new Faltas();
+			f.setAluno(a);
+			f.setData(new Date(System.currentTimeMillis()));
+			Disciplina d = new Disciplina();
+			d.setCodigo(Integer.parseInt(af.getId_disciplina()));
+			f.setDisciplina(d);
+			f.setPresenca(af.getPresenca_aluno());
+			fDao.insetirFaltas(f);
+		}
+		
 		doGet(req, resp);
 	}
 
@@ -80,8 +96,5 @@ public class FaltasServilet extends HttpServlet {
 		}
 		return listaAlunosFaltas;
 	}
-	
-	
-	
 
 }

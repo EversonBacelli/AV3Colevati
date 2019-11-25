@@ -7,4 +7,5 @@ import model.Matricula;
 public interface MatriculaDao {
 	List<Matricula> listAllMatriculas();
 	List<Matricula> listAllMatriculasByDisciplina(String disciplina, String sigla);
+	List<Matricula> listAllMatriculasByDisciplina(int id);
 }

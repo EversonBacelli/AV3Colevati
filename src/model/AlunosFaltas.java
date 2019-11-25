@@ -4,8 +4,15 @@ public class AlunosFaltas {
 	int         ra_aluno;
 	String      nome_aluno;
 	String      presenca_aluno;
+	String      id_disciplina;
 	
 	
+	public String getId_disciplina() {
+		return id_disciplina;
+	}
+	public void setId_disciplina(String id_disciplina) {
+		this.id_disciplina = id_disciplina;
+	}
 	public int getRa_aluno() {
 		return ra_aluno;
 	}

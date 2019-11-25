@@ -36,7 +36,7 @@
 					<div class="form-group">
 						<select name="materia">
 							<c:forEach var="disc" items="${disciplinas}">
-								<option value="${disc.nome}-${disc.sigla}">${disc.nome}
+								<option value="${disc.codigo}">${disc.nome}
 									- ${disc.sigla}</option>
 							</c:forEach>
 						</select>
@@ -126,6 +126,7 @@
 			ra_aluno;
 			nome_aluno;
 			presenca_aluno;
+			id_disciplina;
 		}
 
 		var meuArray = Array.prototype.map.call(document
@@ -144,6 +145,7 @@
 					meuArray[i].push(elements[j].value);
 			    }
 			}
+			meuArray[i].push(document.getElementsByName('materia')[0].value);
 		}
 		
 		
@@ -153,6 +155,7 @@
 			alunoFalta.ra_aluno = meuArray[i][0];
 			alunoFalta.nome_aluno = meuArray[i][1];
 			alunoFalta.presenca_aluno = meuArray[i][2];
+			alunoFalta.id_disciplina = meuArray[i][3];
 			finalArray.push(alunoFalta);
 		}
 	

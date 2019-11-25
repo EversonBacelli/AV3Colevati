@@ -19,7 +19,7 @@ public class FaltaDAOImpl implements FaltaDAO {
 		try {
 			Connection con = DBUtil.getInstance().getConnection();
 			String sql = "INSERT INTO tbl_faltas"
-					+ " (ra_aluno, cod_disciplina, data, presenca)"
+					+ " (ra_aluno, cod_disciplina, dataAula, presenca)"
 					+ " VALUES (?, ?, ?, ?)";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setInt          (1, falta.getAluno().getRa());
