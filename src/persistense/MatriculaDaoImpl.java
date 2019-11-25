@@ -91,9 +91,11 @@ public class MatriculaDaoImpl implements MatriculaDao {
 		try {
 			Connection con = DBUtil.getInstance().getConnection();
 			String sql = "select a.ra_aluno, a.nome as nomeAluno, d.codigo, d.nome as nomeDisciplina,"
-					+ " d.sigla, d.turno, d.num_aulas from tbl_matricula m inner join"
-					+ " tbl_alunos a on m.ra_aluno = a.ra_aluno inner join"
-					+ " tbl_disciplina d on d.codigo = m.codigo_disciplina where d.nome = ? and d.sigla = ?";
+					+ " d.sigla, d.turno, d.num_aulas from tbl_matricula m inner join tbl_alunos a "
+					+ "on m.ra_aluno = a.ra_aluno "
+					+ "inner join tbl_disciplina d "
+					+ "on d.codigo = m.codigo_disciplina "
+					+ "where d.nome = ? and d.sigla = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, disciplina);
 			ps.setString(2, sigla);
@@ -134,5 +136,4 @@ public class MatriculaDaoImpl implements MatriculaDao {
 		}
 		return matriculas;
 	}
-
 }
