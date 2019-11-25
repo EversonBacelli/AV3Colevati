@@ -22,6 +22,8 @@ import persistense.DisciplinaDao;
 import persistense.DisciplinaDaoImpl;
 import persistense.MatriculaDao;
 import persistense.MatriculaDaoImpl;
+import persistense.NotaDAO;
+import persistense.NotaDAOImpl;
 
 @WebServlet("/notas")
 public class NotasServlet extends HttpServlet{
@@ -58,6 +60,8 @@ public class NotasServlet extends HttpServlet{
 		Gson gson = new Gson();
 		Type listType = new TypeToken<ArrayList<AlunosNotas>>(){}.getType();
 		List<AlunosNotas>listaAlunos = gson.fromJson(json, listType);
+		NotaDAO nDao = new NotaDAOImpl();
+		nDao.inserirNotas(listaAlunos);
 		doGet(req, resp);
 	}
 	

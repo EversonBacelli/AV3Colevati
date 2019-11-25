@@ -135,6 +135,9 @@ body {
 				finalArray.push(alunosNotas)
 			}
 		
+			function callBack( resposta, status ) { 
+				location.reload();
+			} 	
 			
 			var URL = 'http://localhost:8080/AV3Colevati/notas';
 
@@ -147,12 +150,8 @@ body {
 					finalArray : JSON.stringify(finalArray)
 				// look here!
 				},
-				success : function(data) {
-
-				},
-				error : function(data) {
-					alert('fail');
-				}
+				sucess: callBack,
+				error: callBack
 			});
 		}
 	</script>
